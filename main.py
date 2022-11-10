@@ -3,8 +3,6 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 import pandas as pd
 
-
-
 # 1. a)
 df = pd.read_csv('data_assignment2.csv')
 area = 'Living_area'
@@ -36,14 +34,15 @@ intercept = linReg.intercept_
 print('Slope coefficient: ', slope)
 print('Intercept: ', intercept)
 
-
 # 1. c)
 slope = linReg.coef_
 intercept = linReg.intercept_
 
+
 # y = kx + m, given a value x
-def predictionFunc(x):
-    return slope * x + intercept
+def predictionFunc(xValue):
+    return slope * xValue + intercept
+
 
 print('Predicted price for 100 m^2: ', predictionFunc(100))
 print('Predicted price for 150 m^2: ', predictionFunc(150))
@@ -54,3 +53,4 @@ import seaborn as sea
 
 sea.residplot(x=x, y=y, data=filterOutliers)
 plt.show()
+
