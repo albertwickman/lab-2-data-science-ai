@@ -2,8 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import svm
 from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.metrics import ConfusionMatrixDisplay, accuracy_score
+
+
 
 dataset = load_iris()
 data = dataset.data
@@ -32,4 +34,19 @@ for title, normalize in titles_options:
         cmap=plt.cm.Blues,
         normalize=normalize,
     )
-plt.show()
+#plt.show()
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn import metrics
+
+# Testing k neighbors from 1 to 100
+for i in range(1, 100):
+
+    kNeighbors = KNeighborsClassifier(n_neighbors=i)
+
+    #Train the model using the training sets
+    kNeighbors.fit(dataTrain, targetTrain)
+
+    #Predict the response for test dataset
+    targetPred = kNeighbors.predict(dataTest)
+    print("Accuracy in percentage, given", i, "neighbors:", metrics.accuracy_score(targetTest, targetPred) * 100, "%")
